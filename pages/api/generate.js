@@ -39,7 +39,7 @@ Réponds UNIQUEMENT avec le texte de la lettre, sans introduction ni commentaire
     })
 
     const data = await response.json()
-    const text = data.content.map(b => b.type === 'text' ? b.text : '').join('')
+    const text = data?.content?.[0]?.text || 'Erreur de génération'
     res.status(200).json({ letter: text })
   } catch (e) {
     res.status(500).json({ error: e.message })
